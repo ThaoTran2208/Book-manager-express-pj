@@ -1,0 +1,18 @@
+
+extends ../layouts/common
+block content
+  .container
+    .row
+      .col-12
+      
+        h1.mt-3= book.title
+        
+        .book-cover
+          if(!book.cover)
+            img(src="https://cdn.glitch.com/d01f87ac-c86c-434a-abea-62691d43bbe4%2Fbookcover.jpg?v=1596880593015")
+          else 
+            img(src=book.cover)
+
+        p.mt-3.mb-3= book.description
+        
+        a.btn.btn-primary(href='/books') Back
