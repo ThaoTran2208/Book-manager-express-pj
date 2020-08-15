@@ -1,0 +1,48 @@
+html
+  head
+    link(rel= "stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/style.css")
+    link(rel="stylesheet", href="/custom.css")
+  body
+    
+      nav(class='navbar navbar-light bg-light')
+        a(class="navbar-brand", href="/")
+          img(src='https://cdn.glitch.com/e084a29d-974e-4aae-8ae1-87d2ebc2db5f%2Ffavicon.png?v=1595909292602')
+
+        ul(class="navbar-nav mr-auto flex-row")
+        
+          if(!user)
+            li(class="nav-item mr-3 active")
+              a(class="nav-link", href="/books") Books
+            li(class="nav-item mr-3")
+              a(class="nav-link", href="/auth/login") Login
+            li(class="nav-item mr-3")
+              a(class="nav-link", href="/signup") Sign Up
+                
+          if(user)
+            if(!user.isAdmin)
+              li(class="nav-item mr-3 active")
+                a(class="nav-link", href="/books") Books
+              li(class="nav-item mr-3")
+                a(class="nav-link", href="/transactions") Transactions
+              li(class="nav-item mr-3")
+                a(class="nav-link", href="/profile") Profile
+              li(class="nav-item mr-3")
+                a(class="nav-link", href="/auth/logout") Log Out
+            
+            if(user.isAdmin)
+              li(class="nav-item mr-3 active")
+                a(class="nav-link", href="/books") Books
+              li(class="nav-item mr-3")
+                a(class="nav-link", href="/users") Users
+              li(class="nav-item mr-3")
+                a(class="nav-link", href="/transactions") Transactions
+              li(class="nav-item mr-3")
+                a(class="nav-link", href="/profile") Profile
+              li(class="nav-item mr-3")
+                a(class="nav-link", href="/auth/logout") Log Out
+          
+        if(user)
+          a(href="/profile")= user.name
+            
+      block content

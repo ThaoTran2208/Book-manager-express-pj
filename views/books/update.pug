@@ -1,0 +1,32 @@
+
+
+extends ../layouts/common
+block content
+  div(class='container')
+    div(class='row')
+      div(class='col-12')
+      
+        h1.mt-3 Update Book
+
+        h3.mt-3.mb-3= book.title
+
+        form(action='/books/' + book.id + '/update', method='POST', enctype="multipart/form-data")
+
+          form(action='/books', method='POST', enctype="multipart/form-data")
+
+            .form-group
+              lable New Title
+              input.form-control(type="text", name='title')
+
+            .form-group
+            lable New Description
+              input.form-control(type="text", name='description')
+
+            .form-group
+                label(for='cover') Book Cover
+                  input#cover.form-control-file(type='file', name='cover')
+
+            button.btn.btn-primary(type="submit") Update
+
+        button.btn.btn-primary
+          a(href='/books') Back

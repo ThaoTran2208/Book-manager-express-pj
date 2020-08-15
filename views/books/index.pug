@@ -1,0 +1,105 @@
+extends ../layouts/common
+block content
+  div(class='container')
+    div(class='row')
+      div(class='col-12')
+        if(!user)
+          .heading.d-flex.mt-3.mb-3
+            h1 Books List
+            .ml-auto.d-flex.align-items-center
+              span.text-success Cart (#{count})
+              a.btn.btn-success(href='/auth/login') Rent
+
+          table.table
+            tr
+              th Cover
+              th Title
+              th View
+              th Add To Cart
+            each book in books
+             tr
+                td#book-cover
+                  if(!book.cover)
+                    img(src="https://cdn.glitch.com/d01f87ac-c86c-434a-abea-62691d43bbe4%2Fbookcover.jpg?v=1596880593015")
+                  else 
+                    img(src=book.cover)
+                td= book.title
+                td
+                    a.btn.btn-warning(href='/books/' + book.id + '/view', style='color: #fff') View
+                td 
+                    a.btn.btn-success(href='/cart/add/' + book.id) Add
+          
+        if(user)
+          if(user.isAdmin)
+            h3(class='mt-3') Add New Book
+
+            form(action='/books', method='POST', enctype="multipart/form-data")
+
+              .form-group
+                lable Title
+                input.form-control(type="text", name='title')
+
+              .form-group
+              lable Description
+                input.form-control(type="text", name='description')
+
+              .form-group
+                  label(for='cover') Book Cover
+                    input#cover.form-control-file(type='file', name='cover')
+
+              button.btn.btn-primary(type="submit") Add
+
+            h3(class='mt-3') Books List
+
+            table.table
+              tr
+                th Cover
+                th Title
+                th View
+                th Update
+                th Delete
+              each book in books
+               tr
+                  td#book-cover
+                    if(!book.cover)
+                      img(src="https://cdn.glitch.com/d01f87ac-c86c-434a-abea-62691d43bbe4%2Fbookcover.jpg?v=1596880593015")
+                    else 
+                      img(src=book.cover)
+                  td= book.title
+                  td
+                      a.btn.btn-warning(href='/books/' + book.id + '/view', style='color: #fff') View
+                  td 
+                      a.btn.btn-success(href='/books/' + book.id + '/update') Update
+                  td 
+                      a.btn.btn-danger(href='/books/' + book.id + '/delete') Delete
+          
+          if(!user.isAdmin)
+            .heading.d-flex.mt-3.mb-3
+              h1 Books List
+              .hire.ml-auto.d-flex.align-items-center
+                span.text-success Cart (#{count})
+                a.btn.btn-success(href='/transactions/rent/' + session.id) Rent
+
+            table.table
+              tr
+                th Cover
+                th Title
+                th View
+                th Add To Cart
+              each book in books
+               tr
+                  td#book-cover
+                    if(!book.cover)
+                      img(src="https://cdn.glitch.com/d01f87ac-c86c-434a-abea-62691d43bbe4%2Fbookcover.jpg?v=1596880593015")
+                    else 
+                      img(src=book.cover)
+                  td= book.title
+                  td
+                      a.btn.btn-warning(href='/books/' + book.id + '/view', style='color: #fff') View
+                  td 
+                      a.btn.btn-success(href='/cart/add/' + book.id ) Add
+
+        
+          
+          
+          

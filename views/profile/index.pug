@@ -1,0 +1,36 @@
+extends ../layouts/common
+block content
+  .container-fluid.bg
+    .container.profile
+      .row
+        .col-12
+          h2.mb-3 Personal Info
+
+        .col-12.col-md-3.avatar
+          if(!user.avatar)
+            img(src= "https://cdn.glitch.com/d30ce8e2-1cd9-4fd5-ab0c-db8dc4e7c410%2Fcat%20default%20avatar.png?v=1596768163107")
+          else
+            img(src= user.avatar)
+          
+          a(href= '/profile/avatar') Upload
+          
+        .col-12.col-md-9.personal-info
+          .row
+            .col-12.top
+              h5 Personal Infomation
+            .col-12.col-md-8.content
+              form(method= 'POST')
+                .form-group
+                  label(for='name') Full Name
+                  input#name.form-control(type='text', aria-describedby='fullname', name='name', value= user.name)
+                .form-group
+                  label(for='phone') Phone Number
+                  input#phone.form-control(type='phone', name='phone', value= user.phone)
+                fieldset(disabled='')
+                  .form-group
+                    label(for='disabledEmail') Email
+                    input#disabledEmail.form-control(type='text', value= user.email)
+                .form-group
+                  label(for='password') Password
+                  input#password.form-control(type='password', name='password', placeholder= '******')
+                button.btn.btn-primary(type='submit') Save

@@ -1,0 +1,28 @@
+extends ../layouts/common
+
+block content
+
+  div(class='container')
+  
+    div(class='row')
+    
+      div(class='col-12')
+      
+        h2(class='mt-3 mb-3') Login
+        
+        if errors
+          each error in errors
+            .alert.alert-danger= error
+        
+        form(action="" method="post")
+          .form-group
+              label Email
+              input.form-control(type="text" name="email" value= values ? values.email : "")
+          .form-group
+              label Password
+              input.form-control(type="password" name="password" value= values ? values.password : "")
+
+          button.btn.btn-primary Login
+          
+          .mt-2 New to Bookmanager? 
+            a(href='/signup') Sign Up

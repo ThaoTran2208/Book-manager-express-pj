@@ -1,0 +1,32 @@
+extends ../layouts/common
+block content
+  .container
+    .row
+      .col-12
+      
+        h3(class='mt-5 mb-3') Your Transactions 
+
+        table.table
+          tr
+            th TransactionID
+            th Book Title
+            th Status      
+
+          if (!usertrans.length)
+            div.mt-3 You have no transactions yet!
+
+          each usertran in usertrans
+
+            tr
+              td= usertran.id
+              td 
+                  each book in books
+                    if book.id == usertran.bookId
+                      span= book.title
+              td 
+                  if usertran.isComplete 
+                    span Đã trả
+                  else
+                    span Chưa trả
+
+        a.btn.btn-primary(href='/books') Go To Books List 
